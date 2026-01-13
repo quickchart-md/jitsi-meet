@@ -131,6 +131,7 @@ import { setVideoQuality } from '../../react/features/video-quality/actions';
 import { toggleBackgroundEffect, toggleBlurredBackgroundEffect } from '../../react/features/virtual-background/actions';
 import { VIRTUAL_BACKGROUND_TYPE } from '../../react/features/virtual-background/constants';
 import { toggleWhiteboard } from '../../react/features/whiteboard/actions.web';
+import AudioStreamCapture from '../../react/features/stream-effects/audio-capture/AudioStreamCapture';
 import { getJitsiMeetTransport } from '../transport';
 
 import {
@@ -919,6 +920,71 @@ function initCommands() {
         },
         'hide-pip': () => {
             APP.store.dispatch(hidePiP());
+        },
+
+        /**
+         * Start capturing audio from all conference participants.
+         * Audio chunks and levels are sent to the parent window via postMessage.
+         *
+         * @param {Object} options - Capture options.
+         * @param {number} options.timeSlice - Time slice in ms for audio chunks (default: 1000).
+         * @param {boolean} options.includeLocal - Include local audio (default: true).
+         * @param {boolean} options.includeRemote - Include remote audio (default: true).
+         * @param {boolean} options.enableLevels - Enable audio level monitoring (default: true).
+         * @param {number} options.levelInterval - Audio level update interval in ms (default: 100).
+         * @param {boolean} options.enableVAD - Enable voice activity detection (default: true).
+         * @param {number} options.vadThreshold - VAD threshold (default: 0.01).
+         */
+        'start-audio-capture': (options = {}) => {
+            sendAnalytics(createApiEvent('audio.capture.start'));
+            const audioCapture = AudioStreamCapture.getInstance();
+
+            // Set the Redux store for automatic track management
+            audioCapture.setStore(APP.store);
+
+            audioCapture.start(options).catch(err => {
+                logger.error('Failed to start audio capture:', err);
+            });
+        },
+
+        /**
+         * Stop capturing audio.
+         */
+        'stop-audio-capture': () => {
+            sendAnalytics(createApiEvent('audio.capture.stop'));
+            const audioCapture = AudioStreamCapture.getInstance();
+
+            audioCapture.stop();
+        },
+
+        /**
+         * Enable transcription (resume sending PCM frames).
+         */
+        'enable-transcription': () => {
+            sendAnalytics(createApiEvent('transcription.enable'));
+            const audioCapture = AudioStreamCapture.getInstance();
+
+            audioCapture.enableTranscription();
+        },
+
+        /**
+         * Disable transcription (stop sending PCM frames, keep VAD/levels).
+         */
+        'disable-transcription': () => {
+            sendAnalytics(createApiEvent('transcription.disable'));
+            const audioCapture = AudioStreamCapture.getInstance();
+
+            audioCapture.disableTranscription();
+        },
+
+        /**
+         * Toggle transcription on/off.
+         */
+        'toggle-transcription': () => {
+            sendAnalytics(createApiEvent('transcription.toggle'));
+            const audioCapture = AudioStreamCapture.getInstance();
+
+            return audioCapture.toggleTranscription();
         }
     };
     transport.on('event', ({ data, name }) => {

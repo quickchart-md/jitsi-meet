@@ -98,7 +98,12 @@ const commands = {
     toggleVideo: 'toggle-video',
     toggleWhiteboard: 'toggle-whiteboard',
     showPiP: 'show-pip',
-    hidePiP: 'hide-pip'
+    hidePiP: 'hide-pip',
+    startAudioCapture: 'start-audio-capture',
+    stopAudioCapture: 'stop-audio-capture',
+    enableTranscription: 'enable-transcription',
+    disableTranscription: 'disable-transcription',
+    toggleTranscription: 'toggle-transcription'
 };
 
 /**

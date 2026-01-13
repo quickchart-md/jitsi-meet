@@ -12,7 +12,7 @@ export const DUMMY_9_BUTTONS_THRESHOLD_VALUE = Symbol('9_BUTTONS_THRESHOLD_VALUE
  */
 export const DUMMY_10_BUTTONS_THRESHOLD_VALUE = Symbol('10_BUTTONS_THRESHOLD_VALUE');
 
-export const DEFAULT_REDUCED_UI_MAIN_TOOLBAR_BUTTONS = [ 'microphone', 'camera' ];
+export const DEFAULT_REDUCED_UI_MAIN_TOOLBAR_BUTTONS = [ 'transcription', 'microphone', 'camera' ];
 
 /**
  * Thresholds for displaying toolbox buttons.
@@ -32,31 +32,31 @@ export const THRESHOLDS = [
     },
     {
         width: 565,
-        order: [ 'microphone', 'camera', 'desktop', 'chat', 'raisehand', 'reactions', 'participants-pane', 'tileview' ]
+        order: [ 'transcription', 'microphone', 'camera', 'desktop', 'chat', 'raisehand', 'reactions', 'participants-pane', 'tileview' ]
     },
     {
         width: 520,
-        order: [ 'microphone', 'camera', 'desktop', 'chat', 'raisehand', 'participants-pane', 'tileview' ]
+        order: [ 'transcription', 'microphone', 'camera', 'desktop', 'chat', 'raisehand', 'participants-pane', 'tileview' ]
     },
     {
         width: 470,
-        order: [ 'microphone', 'camera', 'desktop', 'chat', 'raisehand', 'participants-pane' ]
+        order: [ 'transcription', 'microphone', 'camera', 'desktop', 'chat', 'raisehand', 'participants-pane' ]
     },
     {
         width: 420,
-        order: [ 'microphone', 'camera', 'desktop', 'chat', 'participants-pane' ]
+        order: [ 'transcription', 'microphone', 'camera', 'desktop', 'chat', 'participants-pane' ]
     },
     {
         width: 370,
-        order: [ 'microphone', 'camera', 'chat', 'participants-pane' ]
+        order: [ 'transcription', 'microphone', 'camera', 'chat', 'participants-pane' ]
     },
     {
         width: 225,
-        order: [ 'microphone', 'camera', 'chat' ]
+        order: [ 'transcription', 'microphone', 'camera', 'chat' ]
     },
     {
         width: 200,
-        order: [ 'microphone', 'camera' ]
+        order: [ 'transcription', 'microphone', 'camera' ]
     }
 ];
 
@@ -91,6 +91,7 @@ export const NATIVE_THRESHOLDS = [
  * buttons.
  */
 export const MAIN_TOOLBAR_BUTTONS_PRIORITY = [
+    'transcription',
     'microphone',
     'camera',
     'desktop',
@@ -180,6 +181,7 @@ export const TOOLBAR_BUTTONS: ToolbarButton[] = [
     'stats',
     'tileview',
     'toggle-camera',
+    'transcription',
     'videoquality',
     'whiteboard'
 ];

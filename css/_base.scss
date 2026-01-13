@@ -145,6 +145,15 @@ form {
     z-index: $watermarkZ;
 }
 
+// CUSTOMIZATION: Hide watermarks by default for white-label deployment
+// The watermarks are controlled by interface_config SHOW_JITSI_WATERMARK but
+// to ensure they're hidden even if config doesn't propagate, we hide via CSS
+.leftwatermark,
+.rightwatermark,
+.poweredby {
+    display: none !important;
+}
+
 /**
  * Re-style default OS scrollbar.
  */

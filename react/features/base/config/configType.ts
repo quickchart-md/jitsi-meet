@@ -430,6 +430,7 @@ export interface IConfig {
     hideLoginButton?: boolean;
     hideParticipantsStats?: boolean;
     hideRecordingLabel?: boolean;
+    hideWaitForOwnerDialog?: boolean;
     hosts?: {
         anonymousdomain?: string;
         authdomain?: string;

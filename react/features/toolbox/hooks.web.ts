@@ -52,6 +52,7 @@ import { useSharedVideoButton } from '../shared-video/hooks';
 import SpeakerStats from '../speaker-stats/components/web/SpeakerStats';
 import { isSpeakerStatsDisabled } from '../speaker-stats/functions';
 import { useSpeakerStatsButton } from '../speaker-stats/hooks.web';
+import { TranscriptionButton } from '../stream-effects/audio-capture';
 import { useClosedCaptionButton } from '../subtitles/hooks.web';
 import { toggleTileView } from '../video-layout/actions.any';
 import { shouldDisplayTileView } from '../video-layout/functions.web';
@@ -155,6 +156,12 @@ const settings = {
     key: 'settings',
     Content: SettingsButton,
     group: 4
+};
+
+const transcription = {
+    key: 'transcription',
+    Content: TranscriptionButton,
+    group: 2
 };
 
 const download = {
@@ -309,6 +316,7 @@ export function useToolboxButtons(
         fullscreen: _fullscreen,
         security,
         closedcaptions: cc,
+        transcription,
         polls,
         filesharing,
         recording,

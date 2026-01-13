@@ -71,6 +71,7 @@ import { IScreenshotCaptureState } from '../screenshot-capture/reducer';
 import { IShareRoomState } from '../share-room/reducer';
 import { ISharedVideoState } from '../shared-video/reducer';
 import { ISpeakerStatsState } from '../speaker-stats/reducer';
+import { IAudioCaptureState } from '../stream-effects/audio-capture/reducer';
 import { ISubtitlesState } from '../subtitles/reducer';
 import { ITalkWhileMutedState } from '../talk-while-muted/reducer';
 import { IToolboxState } from '../toolbox/reducer';
@@ -90,6 +91,7 @@ export interface IStore {
 
 export interface IReduxState {
     'features/analytics': IAnalyticsState;
+    'features/audio-capture': IAudioCaptureState;
     'features/authentication': IAuthenticationState;
     'features/av-moderation': IAVModerationState;
     'features/base/app': IAppState;

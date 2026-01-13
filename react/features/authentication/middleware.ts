@@ -230,8 +230,13 @@ MiddlewareRegistry.register(store => next => action => {
 
         // The WAIT_FOR_OWNER action is cyclic, and we don't want to hide the
         // login dialog every few seconds.
-        isDialogOpen(store, LoginDialog)
-            || store.dispatch(openWaitForOwnerDialog());
+        // Check if the dialog should be hidden via config
+        const { hideWaitForOwnerDialog } = store.getState()['features/base/config'];
+
+        if (!hideWaitForOwnerDialog) {
+            isDialogOpen(store, LoginDialog)
+                || store.dispatch(openWaitForOwnerDialog());
+        }
         break;
     }
     }

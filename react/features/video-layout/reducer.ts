@@ -24,10 +24,12 @@ const DEFAULT_STATE = {
      * Note: undefined means that the user hasn't requested anything in particular yet, so
      * we use our auto switching rules.
      *
+     * CUSTOMIZATION: Default to true so tile view is always the starting layout.
+     *
      * @public
      * @type {boolean}
      */
-    tileViewEnabled: undefined
+    tileViewEnabled: true
 };
 
 export interface IVideoLayoutState {

@@ -12,7 +12,7 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
  * development with webpack-dev-server.
  */
 const devServerProxyTarget
-    = process.env.WEBPACK_DEV_SERVER_PROXY_TARGET || 'https://alpha.jitsi.net';
+    = process.env.WEBPACK_DEV_SERVER_PROXY_TARGET || 'http://prosody:5280';
 
 /**
  * Build a Performance configuration object for the given size.
@@ -70,6 +70,40 @@ function devServerProxyBypass({ path }) {
         tpath = tpath.replace(/\/v1\/_cdn\/[^/]+\//, '/');
     }
 
+    // CUSTOMIZATION: Serve local files, only proxy /http-bind to prosody
+
+    // Redirect /external_api.js to /libs/external_api.js (IFrame API expects root path)
+    if (tpath === '/external_api.js') {
+        return '/libs/external_api.js';
+    }
+
+    // Handle /libs/ - strip .min.js only if file doesn't exist (webpack bundles in dev)
+    if (tpath.startsWith('/libs/')) {
+        if (tpath.endsWith('.min.js') && !fs.existsSync(join(process.cwd(), tpath))) {
+            return tpath.replace('.min.js', '.js');
+        }
+        return tpath;
+    }
+
+    // Root path and HTML files
+    if (tpath === '/' || tpath.endsWith('.html')) {
+        return tpath;
+    }
+
+    // Room paths (SPA routing) - serve index.html for any room URL
+    // Room names don't have file extensions and aren't static assets
+    if (!tpath.includes('.') && !tpath.startsWith('/http-bind')) {
+        return '/index.html';
+    }
+
+    // Config files
+    if (tpath === '/config.js'
+            || tpath === '/interface_config.js'
+            || tpath === '/logging_config.js') {
+        return tpath;
+    }
+
+    // Static assets
     if (tpath.startsWith('/css/')
             || tpath.startsWith('/doc/')
             || tpath.startsWith('/fonts/')
@@ -77,18 +111,18 @@ function devServerProxyBypass({ path }) {
             || tpath.startsWith('/lang/')
             || tpath.startsWith('/sounds/')
             || tpath.startsWith('/static/')
-            || tpath.endsWith('.wasm')) {
-
+            || tpath.endsWith('.wasm')
+            || tpath.endsWith('.json')) {
         return tpath;
     }
 
-    if (tpath.startsWith('/libs/')) {
-        if (tpath.endsWith('.min.js') && !fs.existsSync(join(process.cwd(), tpath))) {
-            return tpath.replace('.min.js', '.js');
-        }
-
+    // Other JS files (not in /libs/, not /http-bind)
+    if (tpath.endsWith('.js') && !tpath.startsWith('/http-bind')) {
         return tpath;
     }
+
+    // Only /http-bind should be proxied to prosody
+    // Return undefined to proxy, return path to serve locally
 }
 
 /**
@@ -257,7 +291,8 @@ function getDevServerConfig() {
                 warnings: false
             }
         },
-        host: 'localhost',
+        host: '0.0.0.0',  // CUSTOMIZATION: Bind to all interfaces for Docker access
+        port: 8443,       // CUSTOMIZATION: Use 8443 to match docker-compose
         hot: true,
         proxy: [
             {
@@ -270,7 +305,7 @@ function getDevServerConfig() {
                 }
             }
         ],
-        server: process.env.CODESPACES ? 'http' : 'https',
+        server: 'https',  // Use HTTPS (visit https://localhost:8080 first to accept cert)
         static: {
             directory: process.cwd(),
             watch: {

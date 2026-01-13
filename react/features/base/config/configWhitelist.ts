@@ -168,6 +168,7 @@ export default [
     'hideRecordingLabel',
     'hideParticipantsStats',
     'hideConferenceTimer',
+    'hideWaitForOwnerDialog',
     'hideAddRoomButton',
     'hideEmailInSettings',
     'hideLobbyButton',

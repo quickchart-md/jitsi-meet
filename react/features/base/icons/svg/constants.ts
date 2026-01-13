@@ -87,6 +87,8 @@ import { default as IconRemoteControlStart } from './start-remote-control.svg';
 import { default as IconRemoteControlStop } from './stop-remote-control.svg';
 import { default as IconStop } from './stop.svg';
 import { default as IconSubtitles } from './subtitles.svg';
+import { default as IconTranscribe } from './transcribe.svg';
+import { default as IconTranscribeOn } from './transcribe-on.svg';
 import { default as IconTileView } from './tile-view.svg';
 import { default as IconTrash } from './trash.svg';
 import { default as IconUserDeleted } from './user-deleted.svg';
@@ -202,6 +204,8 @@ export const DEFAULT_ICON: Record<string, any> = {
     IconSites,
     IconStop,
     IconSubtitles,
+    IconTranscribe,
+    IconTranscribeOn,
     IconTileView,
     IconTrash,
     IconUserDeleted,

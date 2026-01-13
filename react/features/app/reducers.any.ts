@@ -47,6 +47,7 @@ import '../recording/reducer';
 import '../settings/reducer';
 import '../speaker-stats/reducer';
 import '../shared-video/reducer';
+import '../stream-effects/audio-capture/reducer';
 import '../subtitles/reducer';
 import '../screen-share/reducer';
 import '../toolbox/reducer';

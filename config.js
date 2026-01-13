@@ -28,28 +28,29 @@ var config = {
     // Connection
     //
 
+    // CUSTOMIZATION: Local development configuration
     hosts: {
-        // XMPP domain.
-        domain: 'jitsi-meet.example.com',
+        // XMPP domain (matches docker-compose prosody config)
+        domain: 'meet.jitsi',
 
-        // When using authentication, domain for guest users.
-        // anonymousdomain: 'guest.example.com',
+        // Domain for guest users
+        anonymousdomain: 'guest.meet.jitsi',
 
-        // Domain for authenticated users. Defaults to <domain>.
-        // authdomain: 'jitsi-meet.example.com',
+        // Domain for authenticated users
+        authdomain: 'meet.jitsi',
 
-        // Focus component domain. Defaults to focus.<domain>.
-        // focus: 'focus.jitsi-meet.example.com',
+        // Focus component domain
+        focus: 'focus.meet.jitsi',
 
-        // XMPP MUC domain. FIXME: use XEP-0030 to discover it.
-        muc: 'conference.' + subdomain + 'jitsi-meet.example.com',
+        // XMPP MUC domain
+        muc: 'conference.meet.jitsi',
     },
 
-    // BOSH URL. FIXME: use XEP-0156 to discover it.
-    bosh: 'https://jitsi-meet.example.com/' + subdir + 'http-bind',
+    // BOSH URL - proxied through webpack dev server to prosody:5280
+    bosh: '/http-bind',
 
-    // Websocket URL (XMPP)
-    websocket: 'wss://jitsi-meet.example.com/' + subdir + 'xmpp-websocket',
+    // Websocket URL - not used in dev, use BOSH
+    // websocket: 'wss://localhost:8080/xmpp-websocket',
 
     // websocketKeepAliveUrl: 'https://jitsi-meet.example.com/' + subdir + '_unlock',
 
@@ -709,7 +710,8 @@ var config = {
     // DEPRECATED! Use 'welcomePage.disabled' instead.
     // Whether to use a welcome page or not. In case it's false a random room
     // will be joined when no room is specified.
-    // enableWelcomePage: true,
+    // CUSTOMIZATION: Disable welcome page - rooms created via API only
+    enableWelcomePage: false,
 
     // Configs for welcome page.
     // welcomePage: {
@@ -795,23 +797,24 @@ var config = {
     // googleApiApplicationClientID: '<client_id>',
 
     // Configs for prejoin page.
-    // prejoinConfig: {
-    //     // When 'true', it shows an intermediate page before joining, where the user can configure their devices.
-    //     enabled: true,
-    //     // Hides the participant name editing field in the prejoin screen.
-    //     // If requireDisplayName is also set as true, a name should still be provided through
-    //     // either the jwt or the userInfo from the iframe api init object in order for this to have an effect.
-    //     hideDisplayName: false,
-    //     // List of buttons to hide from the extra join options dropdown.
-    //     hideExtraJoinButtons: ['no-audio', 'by-phone'],
-    //     // Configuration for pre-call test
-    //     // By setting preCallTestEnabled, you enable the pre-call test in the prejoin page.
-    //     // ICE server credentials need to be provided over the preCallTestICEUrl
-    //     preCallTestEnabled: false,
-    //     preCallTestICEUrl: '',
-    //     // Shows the hangup button in the lobby screen.
-    //     showHangUp: true,
-    // },
+    // CUSTOMIZATION: Disable prejoin page by default - we handle user entry in our app
+    prejoinConfig: {
+        // When 'true', it shows an intermediate page before joining, where the user can configure their devices.
+        enabled: false,
+        // Hides the participant name editing field in the prejoin screen.
+        // If requireDisplayName is also set as true, a name should still be provided through
+        // either the jwt or the userInfo from the iframe api init object in order for this to have an effect.
+        hideDisplayName: true,
+        // List of buttons to hide from the extra join options dropdown.
+        hideExtraJoinButtons: ['no-audio', 'by-phone'],
+        // Configuration for pre-call test
+        // By setting preCallTestEnabled, you enable the pre-call test in the prejoin page.
+        // ICE server credentials need to be provided over the preCallTestICEUrl
+        preCallTestEnabled: false,
+        preCallTestICEUrl: '',
+        // Shows the hangup button in the lobby screen.
+        showHangUp: true,
+    },
 
     // When 'true', the user cannot edit the display name.
     // (Mainly useful when used in conjunction with the JWT so the JWT name becomes read only.)
@@ -1533,7 +1536,8 @@ var config = {
     // },
 
     // Hides the conference subject
-    // hideConferenceSubject: false,
+    // CUSTOMIZATION: Hide room name/subject for cleaner UI
+    hideConferenceSubject: true,
 
     // Hides the conference timer.
     // hideConferenceTimer: false,

@@ -68,8 +68,9 @@ var interfaceConfig = {
 
     /**
      * Hide the invite prompt in the header when alone in the meeting.
+     * CUSTOMIZATION: Hide the invite header for cleaner UI
      */
-    HIDE_INVITE_MORE_HEADER: false,
+    HIDE_INVITE_MORE_HEADER: true,
 
     JITSI_WATERMARK_LINK: 'https://jitsi.org',
 
@@ -127,7 +128,8 @@ var interfaceConfig = {
      */
     SHOW_CHROME_EXTENSION_BANNER: false,
 
-    SHOW_JITSI_WATERMARK: true,
+    // CUSTOMIZATION: Disable Jitsi watermark for white-label deployment
+    SHOW_JITSI_WATERMARK: false,
     SHOW_POWERED_BY: false,
     SHOW_PROMOTIONAL_CLOSE_PAGE: false,
 
