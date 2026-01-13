@@ -1,6 +1,8 @@
 import { SET_TRANSCRIPTION_ENABLED } from './actionTypes';
 import AudioStreamCapture from './AudioStreamCapture';
 
+declare const APP: any;
+
 /**
  * Action to set transcription enabled state.
  *
@@ -14,6 +16,11 @@ export function setTranscriptionEnabled(enabled: boolean) {
         audioCapture.enableTranscription();
     } else {
         audioCapture.disableTranscription();
+    }
+
+    // Notify external API (iframe embedder) of transcription status change
+    if (typeof APP !== 'undefined' && APP.API) {
+        APP.API.notifyTranscriptionStatusChanged(enabled);
     }
 
     return {

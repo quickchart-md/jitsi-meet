@@ -202,3 +202,31 @@ div.hangup-menu-button {
         }
     }
 }
+
+/**
+ * Transcription button - pulsing red recording indicator when active
+ */
+@keyframes transcription-pulse {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(244, 67, 54, 0.7);
+    }
+    50% {
+        box-shadow: 0 0 0 8px rgba(244, 67, 54, 0);
+    }
+}
+
+.toolbox-icon.transcription-active-pulse,
+.toolbox-icon.toggled.transcription-active-pulse {
+    background-color: rgba(244, 67, 54, 0.9) !important;
+    border-radius: 50%;
+    animation: transcription-pulse 1.5s ease-in-out infinite;
+
+    &:hover {
+        animation: none;
+        background-color: rgba(244, 67, 54, 1) !important;
+    }
+
+    svg {
+        fill: white !important;
+    }
+}

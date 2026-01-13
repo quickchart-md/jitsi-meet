@@ -1849,6 +1849,20 @@ class API {
     }
 
     /**
+     * Notify external application (if API is enabled) that transcription status changed.
+     *
+     * @param {boolean} enabled - Whether transcription is enabled.
+     * @returns {void}
+     */
+    notifyTranscriptionStatusChanged(enabled) {
+        this._sendEvent({
+            name: 'transcription-status-changed',
+            enabled,
+            timestamp: Date.now()
+        });
+    }
+
+    /**
      * Notify external application (if API is enabled) that a suspend event in host computer.
      *
      * @returns {void}
