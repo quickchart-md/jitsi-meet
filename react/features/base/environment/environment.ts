@@ -100,6 +100,14 @@ export function isSupportedBrowser() {
  * @returns {boolean}
  */
 export function isSupportedMobileBrowser() {
+    // CUSTOMIZATION: Allow QuickChart iOS/Android WebView apps
+    // These use custom user agents that lib-jitsi-meet doesn't recognize as WebKit
+    // but they are WKWebView-based and support WebRTC
+    const userAgent = navigator.userAgent || '';
+    if (/QuickChartIOS/i.test(userAgent) || /QuickChartAndroid/i.test(userAgent)) {
+        return true;
+    }
+
     return (Platform.OS === 'android' && browser.isSupportedAndroidBrowser())
         || (Platform.OS === 'ios' && browser.isSupportedIOSBrowser());
 }
