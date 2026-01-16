@@ -4,9 +4,9 @@ const { maxTouchPoints, platform, userAgent } = navigator;
 let OS = '',
     isPad = false;
 
-if (userAgent.match(/Android/i)) {
+if (userAgent.match(/Android/i) || userAgent.match(/QuickChartAndroid/i)) {
     OS = 'android';
-} else if (userAgent.match(/iP(ad|hone|od)/i) || (maxTouchPoints && maxTouchPoints > 2 && /MacIntel/.test(platform))) {
+} else if (userAgent.match(/iP(ad|hone|od)/i) || userAgent.match(/QuickChartIOS/i) || (maxTouchPoints && maxTouchPoints > 2 && /MacIntel/.test(platform))) {
     OS = 'ios';
 } else if (userAgent.match(/iP(ad)/i)) {
     OS = 'ios';
