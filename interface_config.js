@@ -92,12 +92,14 @@ var interfaceConfig = {
      *
      * @type {boolean}
      */
-    MOBILE_APP_PROMO: true,
+    // CUSTOMIZATION: Disabled for iOS WebView - prevents redirect prompts
+    MOBILE_APP_PROMO: false,
 
     // Names of browsers which should show a warning stating the current browser
     // has a suboptimal experience. Browsers which are not listed as optimal or
     // unsupported are considered suboptimal. Valid values are:
     // chrome, chromium, electron, firefox , safari, webkit
+    // CUSTOMIZATION: Added 'webkit' explicitly for iOS WKWebView compatibility
     OPTIMAL_BROWSERS: [ 'chrome', 'chromium', 'firefox', 'electron', 'safari', 'webkit' ],
 
     POLICY_LOGO: null,

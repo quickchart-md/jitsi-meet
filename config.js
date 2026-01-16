@@ -1689,6 +1689,13 @@ var config = {
      */
     mouseMoveCallbackInterval: 1000,
 
+    // CUSTOMIZATION: iOS WebView (WKWebView) compatibility
+    // Disable deep linking to prevent redirects to native Jitsi app
+    disableDeepLinking: true,
+
+    // Disable third-party requests that may fail in WebView environments
+    disableThirdPartyRequests: true,
+
     /**
         Use this array to configure which notifications will be shown to the user
         The items correspond to the title or description key of that notification
