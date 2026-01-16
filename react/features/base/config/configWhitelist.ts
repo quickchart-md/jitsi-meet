@@ -80,6 +80,7 @@ export default [
     'channelLastN',
     'connectionIndicators',
     'constraints',
+    'customInviteUrl',
     'deeplinking.disabled',
     'deeplinking.desktop.enabled',
     'defaultLocalDisplayName',

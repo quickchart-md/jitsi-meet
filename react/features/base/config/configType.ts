@@ -249,6 +249,7 @@ export interface IConfig {
         };
     };
     corsAvatarURLs?: Array<string>;
+    customInviteUrl?: string;
     customParticipantMenuButtons?: Array<{ icon: string; id: string; text: string; }>;
     customToolbarButtons?: Array<{ backgroundColor?: string; icon: string; id: string; text: string; }>;
     deeplinking?: IDeeplinkingConfig;

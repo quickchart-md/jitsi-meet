@@ -41,6 +41,14 @@ export function getCurrentConferenceUrl(stateful: IStateful) {
  */
 export function getInviteURL(stateOrGetState: IStateful): string {
     const state = toState(stateOrGetState);
+
+    // Check for custom invite URL first (allows complete override via iframe API)
+    const customInviteUrl = state['features/base/config'].customInviteUrl;
+
+    if (customInviteUrl) {
+        return customInviteUrl;
+    }
+
     let locationURL
         = state instanceof URL
             ? state

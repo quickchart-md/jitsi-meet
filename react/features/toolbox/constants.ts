@@ -40,19 +40,19 @@ export const THRESHOLDS = [
     },
     {
         width: 470,
-        order: [ 'transcription', 'microphone', 'camera', 'desktop', 'chat', 'raisehand', 'participants-pane' ]
+        order: [ 'transcription', 'microphone', 'camera', 'desktop', 'chat' ]
     },
     {
         width: 420,
-        order: [ 'transcription', 'microphone', 'camera', 'desktop', 'chat', 'participants-pane' ]
+        order: [ 'transcription', 'microphone', 'camera', 'chat' ]
     },
     {
         width: 370,
-        order: [ 'transcription', 'microphone', 'camera', 'chat', 'participants-pane' ]
+        order: [ 'transcription', 'microphone', 'camera', 'chat' ]
     },
     {
         width: 225,
-        order: [ 'transcription', 'microphone', 'camera', 'chat' ]
+        order: [ 'transcription', 'microphone', 'camera' ]
     },
     {
         width: 200,
