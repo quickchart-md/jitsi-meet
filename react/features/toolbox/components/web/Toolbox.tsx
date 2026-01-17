@@ -114,7 +114,8 @@ export default function Toolbox({
     const reducedUI = useSelector((state: IReduxState) => state['features/base/responsive-ui'].reducedUI);
     const allButtons = useToolboxButtons(customToolbarButtons);
     const isMobile = isMobileBrowser();
-    const endConferenceSupported = Boolean(conference?.isEndConferenceSupported() && isModerator);
+    // Disabled "End meeting for all" - only allow individual leave
+    const endConferenceSupported = false;
 
     useKeyboardShortcuts(toolbarButtonsToUse);
 
